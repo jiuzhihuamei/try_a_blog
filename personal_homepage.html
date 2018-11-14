@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>舍尔曼博客</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/Normallize.css">
+    <link rel="stylesheet" href="css/myblog.css">
+</head>
+<body>
+
+<header>
+    <div class="logo_area"><img src="../...myblog案例/images/logo2.png" height="170px"></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="#">关于我</a></li>
+            <li><a href="#">个人日志</a></li>
+            <li><a href="#">我的相册</a></li>
+            <li><a href="messages.html">留言板</a></li>
+            <li ><a id="login_status" href="index.html">注销</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div id="box_left">
+    <div id="about" class="left_box"><h4 class="">关于我</h4>
+        <button id="edit1" class="edit btn btn-default">编辑</button>
+        <button class="save btn btn-default">保存</button>
+    </div>
+    <div id="gallery" class="left_box"><h4 class="">我的相册</h4>
+        <button class="uploading btn btn-default">上传</button>
+        <button class="save btn btn-default">保存</button>
+    </div>
+    <div id="sort" class="left_box"><h4 class="">文章分类</h4>
+        <ul id="sortList">
+            <li><a>--日记</a></li>
+            <li><a>--美图</a></li>
+            <li><a>--学习笔记</a></li>
+        </ul>
+    </div>
+    <div id="recommend" class="left_box"><h4 class="">站长推荐</h4>
+        <button class="edit btn btn-default">编辑</button>
+        <button class="save btn btn-default">保存</button>
+    </div>
+    <div id="attention" class="left_box">
+        <h4 class="">关注我
+            <button class="uploading btn btn-default">上传</button>
+            <button class="save btn btn-default">保存</button>
+        </h4>
+        <img id="QR_code" src="images/QR_code.jpg"></div>
+</div>
+<div id="text">
+    <form>
+        <label for="title">标题</label>
+        <input type="text" name="title" id="title">
+    </form>
+    <div id="content" contenteditable="true">
+    </div>
+    <button id="save" class="draft btn btn-default">存草稿</button>
+    <button id="publish" class="pub btn btn-default">发布</button>
+</div>
+<script src="js/checkLogin.js"></script>
+<script>
+        /*保存文章*/
+        document.getElementById("save").onclick = function (ev) {
+            var obj = {};
+            obj.title = document.getElementById("title").value;
+            obj.content = document.getElementById("content").innerText;
+            var xhr1 = new XMLHttpRequest();
+            xhr1.onreadystatechange = function (ev) {
+                if (xhr1.readyState === 4 && xhr1.status === 200) {
+                    var resp = JSON.parse(xhr1.responseText);
+                    if (resp.code === 1) {
+                        for (i = 0; i < resp.data.length; i++) {
+
+                        }
+                    } else {
+
+                    }
+                }
+            };
+            xhr1.open("post", "http://47.99.87.23/api/article/save");
+            xhr1.setRequestHeader('Content-Type', 'application/json');
+            xhr1.send(JSON.stringify(obj));
+        };
+        document.getElementsByClassName("edit");
+</script>
+</body>
+</html>

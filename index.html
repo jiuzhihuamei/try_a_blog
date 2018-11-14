@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>舍尔曼博客</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/Normallize.css">
+    <link rel="stylesheet" href="css/myblog.css">
+</head>
+<body>
+<header>
+    <div class="logo_area"><img src="../...myblog案例/images/logo2.png" height="170px"></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="#">关于我</a></li>
+            <li><a href="#">个人日志</a></li>
+            <li><a href="#">我的相册</a></li>
+            <li><a href="messages.html">留言板</a></li>
+            <li ><a id="login_status" href="login.html"></a></li>
+        </ul>
+    </nav>
+</header>
+<aside id="box_left">
+    <div id="about" class="left_box"><h4 class="">关于我</h4>
+        <p>90后，狮子座，大美女</p></div>
+    <div id="gallery" class="left_box"><h4 class="">我的相册</h4>
+    </div>
+    <div id="sort" class="left_box"><h4 class="">文章分类</h4>
+        <ul id="sortList">
+            <li><a>--日记--</a></li>
+            <li><a>--美图--</a></li>
+            <li><a>--学习笔记--</a></li>
+        </ul>
+    </div>
+    <div id="recommend" class="left_box"><h4 class="">站长推荐</h4>
+    </div>
+    <div id="attention" class="left_box"><h4 class="">关注我</h4>
+        <img id="QR_code" src="images/QR_code.jpg"></div>
+</aside>
+<div id="box_right">
+    <ul id="contentList">
+    </ul>
+</div>
+<!--<script src="js/checkLogin.js"></script>-->
+<script>
+    /*检查登录状态*/
+    var xhr3 = new XMLHttpRequest();
+    xhr3.onreadystatechange = function (ev) {
+        if (xhr3.readyState === 4 && xhr3.status === 200) {
+            var resp = JSON.parse(xhr3.responseText);
+            var login_status = document.getElementById("login_status");
+            if (resp.code === 1) {
+
+                login_status.innerText = "注销";
+            }
+            else {
+                login_status.innerHTML = "登录";
+
+            }
+        }
+    };
+
+    xhr3.open("post", "http://47.99.87.23/api/user/isSignIn");
+    //xhr3.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr3.send();
+    /*添加"关于我"*/
+    /*var xhr1 = new XMLHttpRequest();
+    xhr1.onreadystatechange = function (ev) {
+        if (xhr1.readyState === 4 && xhr1.status === 200) {
+            var resp = JSON.parse(xhr1.responseText);
+            if (resp.code === 1) {
+                for (i = 0; i < resp.data.length; i++) {
+                    var about = document.createElement("p");
+                    var about_me = document.createTextNode();
+                    about.appendChild(about_me);
+                }
+            } else {
+
+            }
+        }
+    };
+    xhr1.open("get", "http://47.99.87.23/api/...");
+    xhr1.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr1.send();*/
+    /*获取文章详情*/
+    var xhr2 = new XMLHttpRequest();
+    xhr2.onreadystatechange = function (ev) {
+        if (xhr2.readyState === 4 && xhr2.status === 200) {
+            var resp = JSON.parse(xhr2.responseText);
+            if (resp.code === 1) {
+                for (i = 0; i < resp.data.length; i++) {
+                    var ul = document.getElementById("contentList");
+                    var a = document.createElement("a");
+                    var title = document.createTextNode(resp.data[i].title);
+                    var li = document.createElement("li");
+                    var passage = document.createElement("p");
+                    var content = document.createTextNode(resp.data[i].content);
+                    ul.appendChild(li);
+                    a.appendChild(title);
+                    li.appendChild(a);
+                    li.appendChild(passage);
+                    passage.appendChild(content);
+                }
+            } else {
+
+            }
+        }
+    };
+    xhr2.open("get", "http://47.99.87.23/api/article/list");
+    xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr2.send();
+
+</script>
+</body>
+</html>

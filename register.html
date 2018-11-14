@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>注册</title>
+    <link rel="stylesheet" href="../styles/Normallize.css">
+    <link rel="stylesheet" href="css/myblog.css">
+</head>
+<body>
+<div class="register_window">
+    <h1 class="text_center">用户注册</h1>
+    <form>
+        <li><label for="tel">用户名</label>
+            <input type="tel" id="tel" name="userName" placeholder="&nbsp;&nbsp;请输入11位手机号">
+        </li>
+        <li><label for="pass">密&emsp;码</label>
+            <input type="password" id="pass" name="pass" placeholder="&nbsp;&nbsp;由字母、数字和符号组成，大于6个字符">
+        </li>
+    </form>
+    <button id="reset">重置</button>
+    <button id="register">注册</button>
+</div>
+<script>
+    document.getElementById("register").onclick = handleButtonPress;
+
+    var httpRequest;
+
+    function handleButtonPress(e) {
+        e.preventDefault();
+        var form = document.getElementById("register_window");
+
+        var formData = [];
+
+        var inputElements = document.getElementsByTagName("input");
+
+        for (i = 0; i < inputElements.length; i++) {
+            formData[inputElements[i].name] = inputElements[i].value;
+
+        }
+        X
+
+        httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = handleResponse;
+        httpRequest.open("post", "http://47.99.87.23/api/wns/user/reg");
+        httpRequest.setRequestHeader('Content-Type', 'application/json');
+        httpRequest.send(JSON.stringify(formData));
+    }
+
+    function handleResponse() {
+        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+            var data = JSON.parse(httpRequest.responseText);
+            if (data.code === 1) {
+                alert("恭喜您注册成功！");
+                //window.open("index.html");
+            } else {
+                alert(data.message);
+            }
+        }
+    }
+</script>
+</body>
+</html>
