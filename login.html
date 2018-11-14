@@ -32,12 +32,12 @@
 
             var form = document.getElementById("login_window");
 
-            var formData = [];
+            var formData = {};
             var inputElements = document.getElementsByTagName("input");
             for (i = 0; i < inputElements.length; i++) {
                 formData[inputElements[i].name]=inputElements[i].value;
             }
-            formData["type"]=2;
+            formData.type=2;
 
             httpRequest = new XMLHttpRequest();
             httpRequest.onreadystatechange = handleResponse;
