@@ -5,10 +5,11 @@ h1 {
     padding-bottom: 10px;
 }
 
-label{
+label {
     font-size: 15px;
 }
-input{
+
+input {
     margin: 20px 10px;
     border-radius: 5px;
     border: #9F9F9F solid 1px;
@@ -16,20 +17,19 @@ input{
     height: 30px;
     font-size: 15px;
 }
-a{
+
+a {
     text-decoration: none;
     color: #93b5c3;
 }
 
-
-.logo_area{
-    background-color:#F6F7F7;
+.logo_area {
+    background-color: #F6F7F7;
     height: 200px;
     text-align: center;
     border-top: 1px solid #e1e1e1;
     border-bottom: 1px solid #e1e1e1;
 }
-
 
 #box_left {
     position: absolute;
@@ -103,8 +103,6 @@ a{
     width: 100%;
 }
 
-
-
 #box_right ul li {
     list-style: none;
     height: auto;
@@ -147,6 +145,16 @@ a{
     margin-bottom: 5px;
 }
 
+/*登录以及注册页面样式*/
+.login_window > form > li, .register_window > form > li {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+.register_window > form > li > input, .login_window > form > li > input {
+    font-size: 15px;
+}
+
 @media screen and (min-width: 768px) {
     .login_window, .register_window {
         width: 400px;
@@ -158,23 +166,27 @@ a{
         background-color: #f0f0f0;
         box-shadow: 10px 10px 5px #aeaeae;
     }
+
     #box_right {
         width: 32%;
         position: absolute;
         top: 248px;
         left: 43%;
     }
-    nav>ul{
+
+    nav > ul {
         margin-top: 10px;
-        padding-left:50%;
+        padding-left: 50%;
         padding-top: 0;
     }
+
     nav > ul > li {
         list-style: none;
         display: inline-block;
         padding: 5px 15px;
     }
 }
+
 @media screen and (max-width: 768px) {
     .login_window, .register_window {
         width: 100%;
@@ -184,17 +196,20 @@ a{
         top: 10%;
         text-align: center;
     }
-    nav>ul{
+
+    nav > ul {
         width: 90%;
         padding: 0 auto;
         margin: 10px auto;
         display: flex;
         align-items: center;
     }
+
     nav > ul > li {
         list-style: none;
         padding: 0 5px;
     }
+
     #box_right {
         width: 100%;
         position: absolute;
@@ -202,22 +217,20 @@ a{
         left: 0;
 
     }
-    #box_right>ul{
+
+    #box_right > ul {
         width: 90%;
         margin: 0 auto;
     }
-    #box_left{
+
+    #box_left {
         display: none;
     }
 
 }
-#reset,#login,#register{
-    background-color: white;
-    padding: 5px 15px;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: #9999aa 1px solid;
-}
-#login,#register{
-    margin-left: 20px;
+
+#reset, #login, #register {
+    width: auto;
+    padding: 5px 10px;
+    margin: 0 20px;
 }

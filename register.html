@@ -18,9 +18,11 @@
         <li><label for="pass">密&emsp;码</label>
             <input type="password" id="pass" name="pass" placeholder="&nbsp;&nbsp;由字母、数字和符号组成，大于6个字符">
         </li>
+        <input type="reset" id="reset" value="重置" />
+        <input type="submit" id="register" value="注册"/>
     </form>
-    <button id="reset">重置</button>
-    <button id="register">注册</button>
+
+
 </div>
 <script>
     document.getElementById("register").onclick = handleButtonPress;
@@ -58,6 +60,8 @@
             }
         }
     }
+
 </script>
+<script src="js/reset_btn.js"></script>
 </body>
 </html>
