@@ -5,8 +5,8 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>注册</title>
-    <link rel="stylesheet" href="../styles/Normallize.css">
     <link rel="stylesheet" href="css/myblog.css">
+    <link rel="stylesheet" href="css/Normallize.css">
 </head>
 <body>
 <div class="register_window">
@@ -31,7 +31,7 @@
         e.preventDefault();
         var form = document.getElementById("register_window");
 
-        var formData = [];
+        var formData = {};
 
         var inputElements = document.getElementsByTagName("input");
 
@@ -39,7 +39,6 @@
             formData[inputElements[i].name] = inputElements[i].value;
 
         }
-        X
 
         httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = handleResponse;
