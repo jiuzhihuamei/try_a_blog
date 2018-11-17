@@ -13,14 +13,14 @@
     <h1 class="text_center">用户登录</h1>
     <form>
         <li><label for="tel">手机号</label>
-            <input type="tel" id="tel" name="mobile" placeholder="&nbsp;&nbsp;请输入11位手机号">
+            <input type="tel" id="tel" name="userName" placeholder="&nbsp;&nbsp;请输入11位手机号">
         </li>
         <li><label for="pass">密&emsp;码</label>
             <input type="password" id="pass" name="pass" placeholder="&nbsp;&nbsp;请输入密码">
         </li>
-        <input type="reset" id="reset" value="重置" />
-        <input type="submit" id="login" value="登录"/>
     </form>
+    <input type="reset" id="reset" value="重置" />
+    <input type="submit" id="login" value="登录"/>
 
 </div>
 
@@ -35,10 +35,10 @@
 
             var formData = {};
             var inputElements = document.getElementsByTagName("input");
-            for (i = 0; i < inputElements.length; i++) {
+            for (i = 0; i <2; i++) {
                 formData[inputElements[i].name]=inputElements[i].value;
             }
-            formData.type=2;
+            formData.loginType=2;
 
             httpRequest = new XMLHttpRequest();
             httpRequest.onreadystatechange = handleResponse;
@@ -51,7 +51,7 @@
         if (httpRequest.readyState === 4 && httpRequest.status === 200) {
             var data = JSON.parse(httpRequest.responseText);
             if (data.code === 1) {
-                //window.location.href = 'personal_homepage.html';
+                window.location.href = 'personal_homepage.html';
                 alert("登录成功");
             } else {
                 alert(data.message);

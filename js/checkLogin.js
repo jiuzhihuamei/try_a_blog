@@ -9,7 +9,8 @@ xhr3.onreadystatechange = function (ev) {
             login_status.innerText = "注销";
         }
         else {
-            login_status.innerHTML = "登录";
+            login_status.innerText = "登录";
+            login_status.href="login.html";
 
         }
     }
