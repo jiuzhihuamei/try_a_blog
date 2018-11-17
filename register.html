@@ -44,7 +44,7 @@
 
         httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = handleResponse;
-        httpRequest.open("post", "http://47.99.87.23/api/wns/user/reg");
+        httpRequest.open("post",  config.apiURL + "/wns/user/reg");
         httpRequest.setRequestHeader('Content-Type', 'application/json');
         httpRequest.send(JSON.stringify(formData));
     }
