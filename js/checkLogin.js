@@ -17,6 +17,6 @@ xhr3.onreadystatechange = function (ev) {
     }
 };
 
-xhr3.open("post", "http://47.99.87.23/api/user/isSignIn");
+xhr3.open("get", "http://47.99.87.23/api/wns/user/checkLogin");
 //xhr3.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 xhr3.send();
