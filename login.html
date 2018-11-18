@@ -26,7 +26,7 @@
 <script src="js/common.js"></script>
 <script>
     document.getElementById("login").onclick =handleButtonPress;
-    var httpRequest;
+    var xhr=new XMLHttpRequest;
 
         function handleButtonPress(e) {
             e.preventDefault();
@@ -40,17 +40,17 @@
             }
             formData.loginType=2;
 
-            httpRequest = new XMLHttpRequest();
-            httpRequest.withCredentials = true;
-            httpRequest.onreadystatechange = handleResponse;
-            httpRequest.open("post",  config.apiURL + "/wns/user/login");
-            httpRequest.setRequestHeader('Content-Type', 'application/json');
-            httpRequest.send(JSON.stringify(formData));
+            xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = handleResponse;
+            xhr.open("post",  config.apiURL + "/wns/user/login");
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(formData));
         }
 
     function handleResponse() {
-        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-            var data = JSON.parse(httpRequest.responseText);
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
             if (data.code === 1) {
                 window.location.href = 'personal_homepage.html';
                 alert("登录成功");

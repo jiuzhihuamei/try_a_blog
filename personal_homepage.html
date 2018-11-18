@@ -55,45 +55,72 @@
         </h4>
         <img id="QR_code" src="images/QR_code.jpg"></div>
 </div>
-<div id="text">
-    <form>
-        <label for="title">标题</label>
-        <input type="text" name="title" id="title">
-    </form>
-    <div id="content" contenteditable="true">
+<div id="box_right">
+    <ul id="contentList">
+    </ul>
+    <div id="p_text">
+        <form>
+            <label for="title">标题</label>
+            <input type="text" name="title" id="title">
+        </form>
+        <div id="content" contenteditable="true">
+        </div>
+        <button id="save" class="draft btn btn-default">存草稿</button>
+        <button id="publish" class="pub btn btn-default">发布</button>
     </div>
-    <button id="save" class="draft btn btn-default">存草稿</button>
-    <button id="publish" class="pub btn btn-default">发布</button>
 </div>
+
 <script src="js/HttpUtil.js"></script>
 <script src="js/common.js"></script>
 <script>
     // 检查登录
     checkLogin();
 
-    /*发布文章*/
+    //自动获取文章详情
+    var refreshList = function () {
+        getJSON(config.apiURL + "/article/list", function (resp) {
+            // 清空原来的文章
+            var contentList = document.getElementById("contentList");
+            while (contentList.hasChildNodes()){
+                contentList.removeChild(contentList.firstChild);
+            }
+            // 重新获取文章
+            for (i = 0; i < resp.data.length; i++) {
+                var ul = document.getElementById("contentList");
+                var a = document.createElement("a");
+                var title = document.createTextNode(resp.data[i].title);
+                var li = document.createElement("li");
+                var passage = document.createElement("p");
+                var content = document.createTextNode(resp.data[i].content);
+                ul.appendChild(li);
+                a.appendChild(title);
+                li.appendChild(a);
+                li.appendChild(passage);
+                passage.appendChild(content);
+            }
+        }, function () {
+            alert("获取文章失败");
+        });
+    };
+
+    refreshList();
+
+    // 发布文章
     document.getElementById("publish").onclick = function (ev) {
         var obj = {};
         obj.title = document.getElementById("title").value;
         obj.content = document.getElementById("content").innerText;
-        var xhr1 = new XMLHttpRequest();
-        xhr1.onreadystatechange = function (ev) {
-            if (xhr1.readyState === 4 && xhr1.status === 200) {
-                var resp = JSON.parse(xhr1.responseText);
-                if (resp.code === 1) {
-                    for (i = 0; i < resp.data.length; i++) {
-
-                    }
-                } else {
-
-                }
-            }
-        };
-        xhr1.open("post", config.apiURL + "/article/save");
-        xhr1.setRequestHeader('Content-Type', 'application/json');
-        xhr1.send(JSON.stringify(obj));
+        postJSONWithJSONParam(config.apiURL + "/article/save", function () {
+            refreshList();
+        }, function () {
+            alert("失败");
+        }, JSON.stringify(obj));
     };
-    document.getElementsByClassName("edit");
+
+
+
+
+
 </script>
 </body>
 </html>

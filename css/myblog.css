@@ -122,12 +122,10 @@ a {
     width: 100px;
 }
 
-#text {
-    width: 32%;
-    position: absolute;
-    top: 228px;
-    left: 43%;
-    margin: 20px;
+#p_text {
+    margin: 0;
+    display: block;
+    width: 100%;
 }
 
 #content {

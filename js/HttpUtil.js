@@ -22,6 +22,24 @@ var postJSON = function (url, funcSuccess, funcFail) {
     xhr.send();
 };
 
+var postJSONWithJSONParam = function (url, funcSuccess, funcFail, jsonParam) {
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.onreadystatechange = function (ev) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var resp = JSON.parse(xhr.responseText);
+            if (resp.code === 1) {
+                funcSuccess();
+            } else {
+                funcFail();
+            }
+        }
+    };
+    xhr.open("post", url);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(jsonParam);
+};
+
 var getJSON = function (url, funcSuccess, funcFail) {
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
