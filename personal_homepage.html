@@ -65,8 +65,10 @@
         </form>
         <div id="content" contenteditable="true">
         </div>
+        <div class="edit_btn">
         <button id="save" class="draft btn btn-default">存草稿</button>
         <button id="publish" class="pub btn btn-default">发布</button>
+    </div>
     </div>
 </div>
 
@@ -90,13 +92,16 @@
                 var a = document.createElement("a");
                 var title = document.createTextNode(resp.data[i].title);
                 var li = document.createElement("li");
+                li.setAttribute("data-id", resp.data[i].id);
                 var passage = document.createElement("p");
                 var content = document.createTextNode(resp.data[i].content);
+
                 ul.appendChild(li);
                 a.appendChild(title);
                 li.appendChild(a);
                 li.appendChild(passage);
                 passage.appendChild(content);
+
             }
         }, function () {
             alert("获取文章失败");
